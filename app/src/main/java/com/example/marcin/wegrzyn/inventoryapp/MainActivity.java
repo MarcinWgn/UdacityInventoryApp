@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.ProductEntry;
@@ -39,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         ListView listView = (ListView) findViewById(R.id.list);
+        TextView emptyView = (TextView) findViewById(R.id.empty_view);
+
+        listView.setEmptyView(emptyView);
+
+
         productCursorAdapter = new ProductCursorAdapter(this,null);
         listView.setAdapter(productCursorAdapter);
 
@@ -54,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String[] projection = {
                 ProductEntry._ID,
                 ProductEntry.COLUMN_NAME,
-                ProductEntry.COLUMN_DESC,
+                ProductEntry.COLUMN_PRICE,
+                ProductEntry.COLUMN_QUANTITY
                };
 
         return new CursorLoader(this,ProductEntry.CONTENT_URI,projection,null,null,null);

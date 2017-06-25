@@ -29,17 +29,25 @@ public class ProductCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
+        TextView id = (TextView) view.findViewById(R.id.item_id);
         TextView name = (TextView) view.findViewById(R.id.item_name);
-        TextView data = (TextView) view.findViewById(R.id.item_data);
+        TextView price = (TextView) view.findViewById(R.id.item_price);
+        TextView quantity = (TextView) view.findViewById(R.id.item_quantity);
 
+        int idColumn = cursor.getColumnIndex(ProductEntry._ID);
         int nameColumn = cursor.getColumnIndex(ProductEntry.COLUMN_NAME);
-        int nameData = cursor.getColumnIndex(ProductEntry.COLUMN_DESC);
+        int priceColumn = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE);
+        int quntityColumn = cursor.getColumnIndex(ProductEntry.COLUMN_QUANTITY);
 
+        String productId = cursor.getString(idColumn);
         String productName = cursor.getString(nameColumn);
-        String productData = cursor.getString(nameData);
+        String productPrice = cursor.getString(priceColumn);
+        String productQuantity = cursor.getString(quntityColumn);
 
+        id.setText(productId);
         name.setText(productName);
-        data.setText(productData);
+        price.setText(productPrice);
+        quantity.setText(productQuantity);
 
     }
 }
