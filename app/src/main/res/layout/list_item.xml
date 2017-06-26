@@ -4,41 +4,40 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="2dp">
+    android:padding="2dp"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/item_id"
-        android:text="id"
         android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
+        style="@style/viewItemStyle"/>
     <TextView
         android:id="@+id/item_name"
-        android:text="name"
-        android:layout_weight="4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
+        android:layout_weight="3"
+        style="@style/viewItemStyle"/>
     <TextView
         android:id="@+id/item_price"
-        android:text="price"
         android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
+        android:textAlignment="textEnd"
+        style="@style/viewItemStyle"/>
+    <TextView
+        android:text="@string/dollar"
+        android:layout_weight="1"
+        style="@style/viewItemStyle"/>
     <TextView
         android:id="@+id/item_quantity"
-        android:text="quantity"
         android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
+        android:textAlignment="textEnd"
+        style="@style/viewItemStyle"/>
+    <TextView
+        android:text="@string/pcs"
+        android:layout_weight="1"
+        style="@style/viewItemStyle"/>
+
     <Button
-        android:text="sale"
-        android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
+        android:id="@+id/sale_button"
+        style="@style/viewItemStyle"
+        android:layout_weight="3"
+        android:text="@string/sale" />
 
 </LinearLayout>
