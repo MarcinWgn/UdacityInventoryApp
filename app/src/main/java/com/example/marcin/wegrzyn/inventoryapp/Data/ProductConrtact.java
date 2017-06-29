@@ -11,9 +11,9 @@ import android.provider.BaseColumns;
 public class ProductConrtact {
 
 
-    public static final String CONTENT_AUTHORITY = "com.example.marcin.wegrzyn.inventoryapp";
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://"+ CONTENT_AUTHORITY);
-    public static final String PATH_PRODUCTS = "products";
+    static final String CONTENT_AUTHORITY = "com.example.marcin.wegrzyn.inventoryapp";
+    static final String PATH_PRODUCTS = "products";
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public ProductConrtact() {
     }
@@ -27,10 +27,6 @@ public class ProductConrtact {
 
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCTS;
-
-
-        public final static String TABLE_NAME = "products";
-
         public final static String _ID = BaseColumns._ID;
         public final static String COLUMN_NAME = "name";
         public final static String COLUMN_QUANTITY = "quantity";
@@ -38,6 +34,7 @@ public class ProductConrtact {
         public final static String COLUMN_DESC = "desc";
         public final static String COLUMN_IMAGE = "image";
         public final static String COLUMN_SUPPLIER = "supplier";
+        final static String TABLE_NAME = "products";
 
     }
 }

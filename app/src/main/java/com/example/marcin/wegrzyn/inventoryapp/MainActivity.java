@@ -1,8 +1,10 @@
 package com.example.marcin.wegrzyn.inventoryapp;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -38,7 +40,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View v) {
 
-                testInsert("Precel", 50, 5, "bialy", "obraz", "Biedronka");
+//                testInsert("Precel", 50, 5, "bialy", "obraz", "Biedronka");
+
+                Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -56,8 +61,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "position: " + String.valueOf(position) + " id: " + String.valueOf(id));
-                Toast.makeText(getBaseContext(), "position: " + String.valueOf(position) + " id: " + String.valueOf(id), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                Uri curUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
+                intent.setData(curUri);
+                startActivity(intent);
             }
         });
 

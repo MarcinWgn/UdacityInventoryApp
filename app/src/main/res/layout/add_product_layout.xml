@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context="com.example.marcin.wegrzyn.inventoryapp.AddProductActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/editStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/name" />
+
+        <EditText
+            android:id="@+id/editName"
+            style="@style/editStyle"
+            android:layout_weight="2"
+            android:inputType="text"
+            android:labelFor="@+id/editName" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/editStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/price" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="2">
+
+            <EditText
+                android:id="@+id/editText"
+                style="@style/editStyle"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:labelFor="@+id/editText"
+                android:paddingEnd="20dp"
+                android:paddingStart="5dp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/editStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end|center_vertical"
+                android:paddingBottom="5dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:text="@string/dollar" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/editStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/quantity" />
+
+        <EditText
+            android:id="@+id/editQuantity"
+            style="@style/editStyle"
+            android:layout_weight="2"
+            android:inputType="number"
+            android:labelFor="@+id/editQuantity" />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/editStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/describe" />
+
+        <EditText
+            android:id="@+id/editDescribe"
+            style="@style/editStyle"
+            android:layout_weight="2"
+            android:inputType="text"
+            android:labelFor="@+id/editDescribe" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

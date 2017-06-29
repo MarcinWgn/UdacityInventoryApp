@@ -21,6 +21,13 @@
             android:name=".Data.ProductProvider"
             android:authorities="com.example.marcin.wegrzyn.inventoryapp"
             android:exported="false" />
+
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AddProductActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

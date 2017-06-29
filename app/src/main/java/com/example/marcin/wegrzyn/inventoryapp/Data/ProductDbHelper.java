@@ -10,14 +10,14 @@ import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.Produ
  * Created by Marcin on 24.06.2017 :)
  */
 
-public class ProductDbHelper extends SQLiteOpenHelper {
+class ProductDbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "products.db";
 
     private static final int DATABASE_VERSION = 1;
 
 
-    public ProductDbHelper(Context context) {
+    ProductDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
