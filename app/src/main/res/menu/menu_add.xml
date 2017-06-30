@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add"
+        android:icon="@mipmap/ic_done"
+        android:title="@string/add_product"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/addImage"
+        android:checkable="true"
+        android:checked="false"
+        android:icon="@mipmap/ic_add_foto"
+        android:title="@string/add_image"
+        app:showAsAction="ifRoom" />
+
+</menu>

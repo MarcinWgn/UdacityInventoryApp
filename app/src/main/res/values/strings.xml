@@ -8,4 +8,9 @@
     <string name="quantity">quantity</string>
     <string name="describe">describe</string>
     <string name="nothing_to_show">There is nothing to show</string>
+    <string name="image">Image</string>
+    <string name="dummy_data">dummy data</string>
+    <string name="add_product">add product</string>
+    <string name="add_image">add image</string>
+    <string name="no_foto">no foto</string>
 </resources>
