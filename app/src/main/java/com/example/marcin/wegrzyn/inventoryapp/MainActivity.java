@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.dummy_data){
-            testInsert("bread",10, 5, "white", "Image", "Lidl");
+            testInsert("zegarek",10, 5, "Rolex", null, "gold@ww.pl");
             return true;
         }
 

@@ -13,4 +13,22 @@
     <string name="add_product">add product</string>
     <string name="add_image">add image</string>
     <string name="no_foto">no foto</string>
+    <string name="supplier">supplier</string>
+    <string name="email">email</string>
+    <string name="insert_failed">Insert product failed:</string>
+    <string name="insert_successful">Insert product successful</string>
+    <string name="complete_field">Complete the required fields</string>
+    <string name="not_be_zero">Price and quantity can not be zero</string>
+    <string name="add_produc_title">add product</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="order">order</string>
+    <string name="delete_product">delete product</string>
+    <string name="id">id</string>
+    <string name="order_product">Order</string>
+    <string name="order_question">Please provide a few pieces:</string>
+    <string name="went_wrong">something went wrong</string>
+    <string name="will_deleted">Item will be deleted</string>
+    <string name="delete">delete</string>
+    <string name="cancel">cancel</string>
 </resources>

@@ -3,13 +3,166 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
     tools:context="com.example.marcin.wegrzyn.inventoryapp.DetailActivity">
 
-    <TextView
-        android:id="@+id/TV1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="test" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            style="@style/detail_text_view_style"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:text="@string/id" />
+
+        <TextView
+            android:id="@+id/TVid"
+            style="@style/detail_text_view_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/id" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:text="@string/name"
+            android:layout_height="wrap_content"
+            style="@style/detail_text_view_style"
+            />
+        <TextView
+            android:hint="@string/name"
+            android:id="@+id/TVname"
+            android:layout_height="wrap_content"
+            style="@style/detail_text_view_style"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:text="@string/price"
+            android:layout_height="wrap_content"
+            style="@style/detail_text_view_style"/>
+
+        <TextView
+            android:id="@+id/TVprice"
+            style="@style/detail_text_view_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/price"
+            android:textAlignment="textEnd" />
+        <TextView
+            android:text="@string/dollar"
+            style="@style/detail_text_view_style"
+             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/detail_text_view_style"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity" />
+
+        <Button
+            android:id="@+id/minusBTN"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/minus" />
+
+        <TextView
+            android:id="@+id/TVquantity"
+            style="@style/detail_text_view_style"
+            android:layout_height="wrap_content"
+            android:hint="@string/quantity"
+            android:textAlignment="textEnd" />
+
+        <Button
+            android:id="@+id/plusBTN"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/plus" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/detail_text_view_style"
+            android:layout_height="wrap_content"
+            android:text="@string/supplier" />
+
+        <TextView
+            android:id="@+id/TVorder"
+            style="@style/detail_text_view_style"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier" />
+
+        <Button
+            android:id="@+id/orderBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/order" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:text="@string/describe"
+            android:layout_height="wrap_content"
+            style="@style/detail_text_view_style"
+            />
+
+        <TextView
+            android:id="@+id/TVdescribe"
+            style="@style/detail_text_view_style"
+            android:layout_height="wrap_content"
+            android:hint="@string/describe" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/no_foto" />
+
+        <TextView
+            android:id="@+id/TVempty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:text="@string/no_foto" />
+
+    </RelativeLayout>
 </LinearLayout>

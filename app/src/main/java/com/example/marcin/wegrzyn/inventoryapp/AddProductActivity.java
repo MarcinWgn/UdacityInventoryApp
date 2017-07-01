@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
 import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.ProductEntry;
@@ -26,14 +27,23 @@ public class AddProductActivity extends AppCompatActivity {
 
     static final int IMAGE_REQUEST_CODE = 1;
     public static final String SAVE_URI = "SaveUri";
+
     private ImageView imageView;
     private TextView emptyView;
-    private Uri uri;
+    private Uri uri = null;
+    private Bitmap bitmap = null;
+
+    private EditText nameEditText;
+    private EditText priceEditText;
+    private EditText quantityEditText;
+    private EditText describeEditText;
+    private EditText emailEditText;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        if(uri!= null) outState.putString(SAVE_URI,uri.toString());
-        super.onSaveInstanceState(outState);
+        if(uri!=null&&!uri.equals(Uri.EMPTY)) {
+            outState.putString(SAVE_URI,uri.toString());
+        }
     }
 
     @Override
@@ -41,19 +51,29 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_product_layout);
 
-        setTitle("add Product");
+        setTitle(getString(R.string.add_produc_title));
 
         imageView = (ImageView) findViewById(R.id.image);
         emptyView = (TextView) findViewById(R.id.textEmpty);
 
-        if(savedInstanceState!=null){
+        nameEditText = (EditText) findViewById(R.id.editName);
+        priceEditText = (EditText) findViewById(R.id.editPrice);
+        quantityEditText = (EditText) findViewById(R.id.editQuantity);
+        describeEditText = (EditText) findViewById(R.id.editDescribe);
+        emailEditText = (EditText) findViewById(R.id.editSupplier);
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addImage();
+            }
+        });
+
+        if(savedInstanceState!=null&&!savedInstanceState.isEmpty()){
             uri = Uri.parse(savedInstanceState.getString(SAVE_URI,null));
             showImage();
         }
-        EditText editText = (EditText) findViewById(R.id.editName);
-        editText.getText();
-
-        if(uri!=null)showImage();
     }
 
     @Override
@@ -66,18 +86,18 @@ public class AddProductActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.add){
-            Toast.makeText(this,"add",Toast.LENGTH_SHORT).show();
+            saveProduct();
             return true;
 
         }else if(id == R.id.addImage){
-            Intent getImageIntent = new Intent(Intent.ACTION_PICK);
-            getImageIntent.setType("image/*");
-            startActivityForResult(getImageIntent, IMAGE_REQUEST_CODE);
+            addImage();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -88,8 +108,15 @@ public class AddProductActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void addImage() {
+        Intent getImageIntent = new Intent(Intent.ACTION_PICK);
+        getImageIntent.setType("image/*");
+        startActivityForResult(getImageIntent, IMAGE_REQUEST_CODE);
+    }
+
     private void showImage(){
-        Bitmap bitmap = null;
+
         try {
             bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
         } catch (FileNotFoundException e) {
@@ -98,8 +125,50 @@ public class AddProductActivity extends AppCompatActivity {
         imageView.setImageBitmap(bitmap);
         emptyView.setVisibility(View.INVISIBLE);
     }
+    private void saveProduct(){
 
-    private void testInsert(String name, int quantity, int price, String desc, String img, String supplier) {
+        String name = nameEditText.getText().toString().trim();
+        String priceString = priceEditText.getText().toString().trim();
+        String quantityString = quantityEditText.getText().toString().trim();
+        String describe = describeEditText.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+
+        if(name.isEmpty()
+                ||priceString.isEmpty()
+                ||quantityString.isEmpty()
+                ||describe.isEmpty()
+                ||email.isEmpty()){
+            Toast.makeText(this, R.string.complete_field,Toast.LENGTH_SHORT).show();
+        }else{
+
+            float price = Float.parseFloat(priceString);
+            int quantity = Integer.parseInt(quantityString);
+
+            if(price==0||quantity==0){
+                Toast.makeText(this, R.string.not_be_zero,Toast.LENGTH_SHORT).show();
+            }else {
+                productInsert(name,quantity,price,describe,bitmap,email);
+            }
+        }
+
+    }
+    private byte[] convertBitmap(Bitmap bitmap){
+
+            byte [] output;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+
+        output = outputStream.toByteArray();
+        return output;
+    }
+
+    private boolean productInsert(String name, int quantity, float price, String desc, Bitmap bitmap, String supplier) {
+
+        byte[] img = null;
+
+        if(bitmap!=null){
+            img = convertBitmap(bitmap);
+        }
 
         ContentValues contentValues = new ContentValues();
 
@@ -112,7 +181,14 @@ public class AddProductActivity extends AppCompatActivity {
 
 
         Uri uri = getContentResolver().insert(ProductEntry.CONTENT_URI, contentValues);
-        Toast.makeText(getBaseContext(), "Test Insert: " + uri, Toast.LENGTH_SHORT).show();
+        if(uri == null ){
+            Toast.makeText(this, R.string.insert_failed, Toast.LENGTH_SHORT).show();
+            return false;
+        }else {
+            Toast.makeText(this, R.string.insert_successful, Toast.LENGTH_SHORT).show();
+            finish();
+            return true;
+        }
 
     }
 

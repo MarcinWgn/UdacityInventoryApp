@@ -46,11 +46,11 @@
             android:layout_weight="2">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editPrice"
                 style="@style/editStyle"
                 android:layout_width="match_parent"
                 android:inputType="numberDecimal"
-                android:labelFor="@+id/editText"
+                android:labelFor="@+id/editPrice"
                 android:paddingEnd="20dp"
                 android:paddingStart="5dp" />
 
@@ -112,6 +112,30 @@
             android:labelFor="@+id/editDescribe" />
 
     </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/editStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/supplier" />
+
+        <EditText
+            android:id="@+id/editSupplier"
+            style="@style/editStyle"
+            android:layout_weight="2"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:labelFor="@+id/editSupplier" />
+
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

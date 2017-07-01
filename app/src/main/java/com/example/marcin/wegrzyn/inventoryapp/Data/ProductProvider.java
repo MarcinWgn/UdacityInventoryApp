@@ -97,15 +97,15 @@ public class ProductProvider extends ContentProvider {
 
         String name = values.getAsString(ProductEntry.COLUMN_NAME);
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("requies a name");
+            throw new IllegalArgumentException("required a name");
         }
         Integer quantity = values.getAsInteger(ProductEntry.COLUMN_QUANTITY);
         if (quantity == null || quantity < 0) {
-            throw new IllegalArgumentException("requies valid quantity");
+            throw new IllegalArgumentException("required valid quantity");
         }
         Integer price = values.getAsInteger(ProductEntry.COLUMN_PRICE);
         if (price == null || price < 0) {
-            throw new IllegalArgumentException("reqies valid price");
+            throw new IllegalArgumentException("required valid price");
         }
         String desc = values.getAsString(ProductEntry.COLUMN_DESC);
         if (desc == null) {
@@ -113,7 +113,7 @@ public class ProductProvider extends ContentProvider {
         }
         String supplier = values.getAsString(ProductEntry.COLUMN_SUPPLIER);
         if (supplier == null) {
-
+            throw new IllegalArgumentException("required valid addres");
         }
         String image = values.getAsString(ProductEntry.COLUMN_IMAGE);
         if (image == null) {
@@ -134,7 +134,30 @@ public class ProductProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+
+        final int match = URI_MATCHER.match(uri);
+        SQLiteDatabase database = productDbHelper.getWritableDatabase();
+
+        int delRows;
+
+        switch (match){
+            case PRODUCTS:
+                delRows = database.delete(ProductEntry.TABLE_NAME,selection,selectionArgs);
+                break;
+            case PRODUCT_ID:
+                selection = ProductEntry._ID + "=?";
+                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                delRows = database.delete(ProductEntry.TABLE_NAME,selection,selectionArgs);
+                break;
+
+            default:
+                throw new IllegalArgumentException("not support for: "+uri);
+        }
+
+        if (delRows!= 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return delRows;
     }
 
     @Override
