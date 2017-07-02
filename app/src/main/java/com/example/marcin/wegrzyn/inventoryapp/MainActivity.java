@@ -2,7 +2,6 @@ package com.example.marcin.wegrzyn.inventoryapp;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +24,6 @@ import com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.ProductEntry
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-
-    public static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int PRODUCT_LOADER = 0;
     ProductCursorAdapter productCursorAdapter;
@@ -84,19 +80,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 ProductEntry.COLUMN_PRICE,
                 ProductEntry.COLUMN_QUANTITY
         };
-
         return new CursorLoader(this, ProductEntry.CONTENT_URI, projection, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        Log.d(TAG, "onLoadFinished");
         productCursorAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        Log.d(TAG, "onLoaderReset");
         productCursorAdapter.swapCursor(null);
     }
 
@@ -109,15 +102,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.dummy_data) {
-            testInsert(getString(R.string.ex_product), 10, 10.99,
-                    getString(R.string.examp_desc), null,
-                    getString(R.string.examp_email));
-            return true;
-        } else if (id == R.id.deleteAll) {
+        if (id == R.id.deleteAll) {
             delete();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -151,27 +138,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             Toast.makeText(getBaseContext(), getString(R.string.delete_all)
                     + " " + rowsDel + " " + getString(R.string.rows), Toast.LENGTH_SHORT).show();
         } else
-            Toast.makeText(getBaseContext(), "Nothing delete", Toast.LENGTH_SHORT).show();
-    }
-
-    private void testInsert(String name, int quantity, double price, String desc, String img, String supplier) {
-
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(ProductEntry.COLUMN_NAME, name);
-        contentValues.put(ProductEntry.COLUMN_QUANTITY, quantity);
-        contentValues.put(ProductEntry.COLUMN_PRICE, price);
-        contentValues.put(ProductEntry.COLUMN_DESC, desc);
-        contentValues.put(ProductEntry.COLUMN_IMAGE, img);
-        contentValues.put(ProductEntry.COLUMN_SUPPLIER, supplier);
-
-
-        Uri uri = getContentResolver().insert(ProductEntry.CONTENT_URI, contentValues);
-        if (uri != null) {
-            Toast.makeText(getBaseContext(), R.string.added_dumme, Toast.LENGTH_SHORT).show();
-        } else
-            Toast.makeText(getBaseContext(), R.string.no_added, Toast.LENGTH_SHORT).show();
-
-
+            Toast.makeText(getBaseContext(), R.string.not_del, Toast.LENGTH_SHORT).show();
     }
 }

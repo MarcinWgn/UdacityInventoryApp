@@ -133,7 +133,8 @@ public class AddProductActivity extends AppCompatActivity {
                 || priceString.isEmpty()
                 || quantityString.isEmpty()
                 || describe.isEmpty()
-                || email.isEmpty()) {
+                || email.isEmpty()
+                || bitmap==null) {
             Toast.makeText(this, R.string.complete_field, Toast.LENGTH_SHORT).show();
         } else {
 
