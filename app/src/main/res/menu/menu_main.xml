@@ -8,5 +8,8 @@
         android:id="@+id/dummy_data"
         android:title="@string/dummy_data"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/deleteAll"
+        android:title="Delete all products"/>
 
 </menu>

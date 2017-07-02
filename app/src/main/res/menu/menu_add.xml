@@ -8,10 +8,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/addImage"
-        android:checkable="true"
-        android:checked="false"
         android:icon="@mipmap/ic_add_foto"
         android:title="@string/add_image"
         app:showAsAction="ifRoom" />
-
 </menu>

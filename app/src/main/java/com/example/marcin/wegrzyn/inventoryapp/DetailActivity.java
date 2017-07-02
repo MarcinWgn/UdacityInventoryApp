@@ -162,7 +162,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     }
     private void delete(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.will_deleted);
+        builder.setMessage(R.string.delete_this);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -51,7 +51,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_product_layout);
 
-        setTitle(getString(R.string.add_produc_title));
+        setTitle(getString(R.string.add_product));
 
         imageView = (ImageView) findViewById(R.id.image);
         emptyView = (TextView) findViewById(R.id.textEmpty);
@@ -141,7 +141,7 @@ public class AddProductActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.complete_field,Toast.LENGTH_SHORT).show();
         }else{
 
-            float price = Float.parseFloat(priceString);
+            double price = Double.parseDouble(priceString);
             int quantity = Integer.parseInt(quantityString);
 
             if(price==0||quantity==0){
@@ -156,13 +156,13 @@ public class AddProductActivity extends AppCompatActivity {
 
             byte [] output;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,50,outputStream);
 
         output = outputStream.toByteArray();
         return output;
     }
 
-    private boolean productInsert(String name, int quantity, float price, String desc, Bitmap bitmap, String supplier) {
+    private boolean productInsert(String name, int quantity, double price, String desc, Bitmap bitmap, String supplier) {
 
         byte[] img = null;
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="5dp"
+    android:padding="8dp"
     tools:context="com.example.marcin.wegrzyn.inventoryapp.DetailActivity">
 
     <LinearLayout
@@ -12,60 +12,76 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
         <TextView
-            style="@style/detail_text_view_style"
-            android:layout_width="15dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.3"
             android:text="@string/id" />
 
         <TextView
             android:id="@+id/TVid"
-            style="@style/detail_text_view_style"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:hint="@string/id" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/name"
-            android:layout_height="wrap_content"
-            style="@style/detail_text_view_style"
-            />
+            android:textSize="20sp" />
+
         <TextView
-            android:hint="@string/name"
             android:id="@+id/TVname"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/detail_text_view_style"/>
+            android:layout_weight="4"
+            android:hint="@string/name"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:text="@string/price"
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/detail_text_view_style"/>
+            android:layout_weight="2"
+            android:text="@string/price" />
 
         <TextView
             android:id="@+id/TVprice"
-            style="@style/detail_text_view_style"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="4"
             android:hint="@string/price"
-            android:textAlignment="textEnd" />
+            android:textAlignment="center" />
+
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:text="@string/dollar"
-            style="@style/detail_text_view_style"
-             />
+            android:textAlignment="center" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,78 +89,103 @@
         android:orientation="horizontal">
 
         <TextView
-            style="@style/detail_text_view_style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/quantity" />
-
-        <Button
-            android:id="@+id/minusBTN"
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/minus" />
 
         <TextView
             android:id="@+id/TVquantity"
-            style="@style/detail_text_view_style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:hint="@string/quantity"
-            android:textAlignment="textEnd" />
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/minusBTN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/minus" />
 
         <Button
             android:id="@+id/plusBTN"
-            android:layout_width="45dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
             android:text="@string/plus" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            style="@style/detail_text_view_style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/supplier" />
 
         <TextView
             android:id="@+id/TVorder"
-            style="@style/detail_text_view_style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/supplier" />
+            android:layout_weight="2"
+            android:hint="@string/supplier"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/orderBTN"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:text="@string/order" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:text="@string/describe"
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/detail_text_view_style"
-            />
+            android:layout_weight="1"
+            android:text="@string/describe" />
 
         <TextView
             android:id="@+id/TVdescribe"
-            style="@style/detail_text_view_style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/describe" />
+            android:layout_weight="3"
+            android:hint="@string/describe"
+            android:minLines="2"
+            android:textAlignment="center" />
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/colorAccent"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -161,8 +202,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="24sp"
-            android:text="@string/no_foto" />
+            android:text="@string/no_foto"
+            android:textSize="24sp" />
 
     </RelativeLayout>
 </LinearLayout>
