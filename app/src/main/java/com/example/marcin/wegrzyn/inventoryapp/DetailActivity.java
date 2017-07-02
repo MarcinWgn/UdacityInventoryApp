@@ -27,7 +27,7 @@ import java.io.ByteArrayInputStream;
 
 import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.ProductEntry;
 
-public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     public static final String TAG = DetailActivity.class.getSimpleName();
@@ -59,7 +59,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_layout);
-        setTitle("product");
+        setTitle(getString(R.string.product_detail));
 
         idTextView = (TextView) findViewById(R.id.TVid);
         nameTextView = (TextView) findViewById(R.id.TVname);
@@ -85,10 +85,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(quantity>0){
-                   quantity--;
-                   quantityTextView.setText(String.valueOf(quantity));
-               }
+                if (quantity > 0) {
+                    quantity--;
+                    quantityTextView.setText(String.valueOf(quantity));
+                }
 
             }
         });
@@ -97,12 +97,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + supplier));
                 intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.order_product));
-                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.order_question)+" "+name);
-               try {
-                   startActivity(intent);
-               }catch (ActivityNotFoundException e){
-                   Toast.makeText(getBaseContext(), R.string.went_wrong,Toast.LENGTH_SHORT).show();
-               }
+                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.order_question) + " " + name);
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getBaseContext(), R.string.went_wrong, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -112,14 +112,14 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
         getLoaderManager().initLoader(PODUCT_LOADER, null, this);
 
-        Log.d(TAG,"uri ---> "+curUri.toString());
+        Log.d(TAG, "uri ---> " + curUri.toString());
 
     }
 
-    private void updateQuantity(int quantity){
+    private void updateQuantity(int quantity) {
         ContentValues values = new ContentValues();
-        values.put(ProductEntry.COLUMN_QUANTITY,quantity);
-        getContentResolver().update(curUri,values,null,null);
+        values.put(ProductEntry.COLUMN_QUANTITY, quantity);
+        getContentResolver().update(curUri, values, null, null);
     }
 
     @Override
@@ -130,13 +130,13 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detail,menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.delete){
+        if (item.getItemId() == R.id.delete) {
             delete();
             return true;
         }
@@ -160,7 +160,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
         return new CursorLoader(this, curUri, projection, null, null, null);
     }
-    private void delete(){
+
+    private void delete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_this);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
@@ -183,19 +184,20 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         alertDialog.show();
 
     }
-    private void deleteProduct(){
-        if(curUri!= null){
-            int rowDel = getContentResolver().delete(curUri,null,null);
-            if(rowDel!=0) finish();
+
+    private void deleteProduct() {
+        if (curUri != null) {
+            int rowDel = getContentResolver().delete(curUri, null, null);
+            if (rowDel != 0) finish();
         }
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
-        if(data == null || data.getCount() <1) return;
+        if (data == null || data.getCount() < 1) return;
 
-        if(data.moveToFirst()){
+        if (data.moveToFirst()) {
 
             int idColumn = data.getColumnIndex(ProductEntry._ID);
             int nameColumn = data.getColumnIndex(ProductEntry.COLUMN_NAME);
@@ -210,7 +212,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             quantity = data.getInt(quntityColumn);
             float price = data.getFloat(priceColumn);
             String desc = data.getString(descColumn);
-            byte[] img= data.getBlob(imageColumn);
+            byte[] img = data.getBlob(imageColumn);
             supplier = data.getString(supplierColumn);
 
             idTextView.setText(String.valueOf(id));
@@ -220,12 +222,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             supplierTextView.setText(supplier);
             describeTextView.setText(desc);
 
-            if(img!= null){
+            if (img != null) {
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(img);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView.setImageBitmap(bitmap);
                 emptyView.setVisibility(View.INVISIBLE);
-            }else emptyView.setVisibility(View.VISIBLE);
+            } else emptyView.setVisibility(View.VISIBLE);
         }
 
     }

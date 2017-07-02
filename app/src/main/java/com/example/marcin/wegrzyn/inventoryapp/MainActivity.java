@@ -109,19 +109,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if ( id == R.id.dummy_data) {
-            testInsert(getString(R.string.ex_product), 10, 10.99 ,
+        if (id == R.id.dummy_data) {
+            testInsert(getString(R.string.ex_product), 10, 10.99,
                     getString(R.string.examp_desc), null,
                     getString(R.string.examp_email));
             return true;
-        }else if (id == R.id.deleteAll){
-           delete();
+        } else if (id == R.id.deleteAll) {
+            delete();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void delete(){
+    private void delete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_all_products);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
@@ -147,11 +147,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void deleteAllProduct() {
         int rowsDel = getContentResolver().delete(ProductEntry.CONTENT_URI, null, null);
-        if(rowsDel>0){
-            Toast.makeText(getBaseContext(),getString(R.string.delete_all)
-                    +" "+rowsDel+" "+getString(R.string.rows),Toast.LENGTH_SHORT).show();
-        }else
-            Toast.makeText(getBaseContext(),"Nothing delete",Toast.LENGTH_SHORT).show();
+        if (rowsDel > 0) {
+            Toast.makeText(getBaseContext(), getString(R.string.delete_all)
+                    + " " + rowsDel + " " + getString(R.string.rows), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getBaseContext(), "Nothing delete", Toast.LENGTH_SHORT).show();
     }
 
     private void testInsert(String name, int quantity, double price, String desc, String img, String supplier) {

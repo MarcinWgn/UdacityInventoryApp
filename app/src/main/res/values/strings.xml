@@ -12,9 +12,9 @@
     <string name="dummy_data">Insert dummy data</string>
     <string name="add_product">Add product</string>
     <string name="add_image">Add image</string>
-    <string name="no_foto">No foto</string>
+    <string name="no_foto">No picture available</string>
     <string name="supplier">Supplier</string>
-    <string name="email">Email</string>
+    <string name="email">email</string>
     <string name="insert_failed">Insert product failed:</string>
     <string name="insert_successful">Insert product successful</string>
     <string name="complete_field">Complete the required fields</string>
@@ -38,4 +38,5 @@
     <string name="delete_all">Delete:</string>
     <string name="rows">Rows</string>
     <string name="delete_all_products">Delete all products</string>
+    <string name="product_detail">Product detail</string>
 </resources>

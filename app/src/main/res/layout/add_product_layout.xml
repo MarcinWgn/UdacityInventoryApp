@@ -116,7 +116,8 @@
             style="@style/editStyle"
             android:layout_weight="2"
             android:inputType="text"
-            android:labelFor="@+id/editDescribe" />
+            android:labelFor="@+id/editDescribe"
+            android:textAlignment="textStart" />
 
     </LinearLayout>
 
@@ -139,13 +140,15 @@
             android:layout_weight="2"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:labelFor="@+id/editSupplier" />
+            android:labelFor="@+id/editSupplier"
+            android:textAlignment="textStart" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginBottom="2dp"
         android:background="@color/colorAccent" />
 
     <RelativeLayout
@@ -163,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/no_foto"
+            android:text="@string/add_image"
             android:textSize="24sp" />
 
     </RelativeLayout>

@@ -22,12 +22,8 @@ import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.Produ
 
 public class AddProductActivity extends AppCompatActivity {
 
-
-    public static final String TAG = AddProductActivity.class.getName();
-
-    static final int IMAGE_REQUEST_CODE = 1;
     public static final String SAVE_URI = "SaveUri";
-
+    static final int IMAGE_REQUEST_CODE = 1;
     private ImageView imageView;
     private TextView emptyView;
     private Uri uri = null;
@@ -41,8 +37,8 @@ public class AddProductActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        if(uri!=null&&!uri.equals(Uri.EMPTY)) {
-            outState.putString(SAVE_URI,uri.toString());
+        if (uri != null && !uri.equals(Uri.EMPTY)) {
+            outState.putString(SAVE_URI, uri.toString());
         }
     }
 
@@ -70,26 +66,26 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
-        if(savedInstanceState!=null&&!savedInstanceState.isEmpty()){
-            uri = Uri.parse(savedInstanceState.getString(SAVE_URI,null));
+        if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+            uri = Uri.parse(savedInstanceState.getString(SAVE_URI, null));
             showImage();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add,menu);
+        getMenuInflater().inflate(R.menu.menu_add, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.add){
+        if (id == R.id.add) {
             saveProduct();
             return true;
 
-        }else if(id == R.id.addImage){
+        } else if (id == R.id.addImage) {
             addImage();
             return true;
         }
@@ -98,10 +94,9 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==IMAGE_REQUEST_CODE&&resultCode==RESULT_OK&&data!=null){
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             uri = data.getData();
             showImage();
         }
@@ -115,7 +110,7 @@ public class AddProductActivity extends AppCompatActivity {
         startActivityForResult(getImageIntent, IMAGE_REQUEST_CODE);
     }
 
-    private void showImage(){
+    private void showImage() {
 
         try {
             bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
@@ -125,7 +120,8 @@ public class AddProductActivity extends AppCompatActivity {
         imageView.setImageBitmap(bitmap);
         emptyView.setVisibility(View.INVISIBLE);
     }
-    private void saveProduct(){
+
+    private void saveProduct() {
 
         String name = nameEditText.getText().toString().trim();
         String priceString = priceEditText.getText().toString().trim();
@@ -133,31 +129,31 @@ public class AddProductActivity extends AppCompatActivity {
         String describe = describeEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
 
-        if(name.isEmpty()
-                ||priceString.isEmpty()
-                ||quantityString.isEmpty()
-                ||describe.isEmpty()
-                ||email.isEmpty()){
-            Toast.makeText(this, R.string.complete_field,Toast.LENGTH_SHORT).show();
-        }else{
+        if (name.isEmpty()
+                || priceString.isEmpty()
+                || quantityString.isEmpty()
+                || describe.isEmpty()
+                || email.isEmpty()) {
+            Toast.makeText(this, R.string.complete_field, Toast.LENGTH_SHORT).show();
+        } else {
 
             double price = Double.parseDouble(priceString);
             int quantity = Integer.parseInt(quantityString);
 
-            if(price==0||quantity==0){
-                Toast.makeText(this, R.string.not_be_zero,Toast.LENGTH_SHORT).show();
-            }else {
-                productInsert(name,quantity,price,describe,bitmap,email);
+            if (price == 0 || quantity == 0) {
+                Toast.makeText(this, R.string.not_be_zero, Toast.LENGTH_SHORT).show();
+            } else {
+                productInsert(name, quantity, price, describe, bitmap, email);
             }
         }
 
     }
-    private byte[] convertBitmap(Bitmap bitmap){
 
-            byte [] output;
+    private byte[] convertBitmap(Bitmap bitmap) {
+
+        byte[] output;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,50,outputStream);
-
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
         output = outputStream.toByteArray();
         return output;
     }
@@ -166,7 +162,7 @@ public class AddProductActivity extends AppCompatActivity {
 
         byte[] img = null;
 
-        if(bitmap!=null){
+        if (bitmap != null) {
             img = convertBitmap(bitmap);
         }
 
@@ -181,10 +177,10 @@ public class AddProductActivity extends AppCompatActivity {
 
 
         Uri uri = getContentResolver().insert(ProductEntry.CONTENT_URI, contentValues);
-        if(uri == null ){
+        if (uri == null) {
             Toast.makeText(this, R.string.insert_failed, Toast.LENGTH_SHORT).show();
             return false;
-        }else {
+        } else {
             Toast.makeText(this, R.string.insert_successful, Toast.LENGTH_SHORT).show();
             finish();
             return true;

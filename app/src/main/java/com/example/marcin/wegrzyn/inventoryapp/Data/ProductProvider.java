@@ -1,25 +1,22 @@
 package com.example.marcin.wegrzyn.inventoryapp.Data;
 
-import android.content.ContentProvider;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.UriMatcher;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+        import android.content.ContentProvider;
+        import android.content.ContentUris;
+        import android.content.ContentValues;
+        import android.content.UriMatcher;
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.net.Uri;
+        import android.support.annotation.NonNull;
+        import android.support.annotation.Nullable;
 
-import com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.ProductEntry;
+        import com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.ProductEntry;
 
 /**
  * Created by Marcin on 24.06.2017 :)
  */
 
 public class ProductProvider extends ContentProvider {
-
-    public static final String TAG = ProductProvider.class.getSimpleName();
-
 
     public static final int PRODUCTS = 10;
     public static final int PRODUCT_ID = 11;
@@ -29,9 +26,11 @@ public class ProductProvider extends ContentProvider {
 
     static {
 
-        URI_MATCHER.addURI(ProductConrtact.CONTENT_AUTHORITY, ProductConrtact.PATH_PRODUCTS, PRODUCTS);
+        URI_MATCHER.addURI(ProductConrtact.CONTENT_AUTHORITY,
+                ProductConrtact.PATH_PRODUCTS, PRODUCTS);
 
-        URI_MATCHER.addURI(ProductConrtact.CONTENT_AUTHORITY, ProductConrtact.PATH_PRODUCTS + "/#", PRODUCT_ID);
+        URI_MATCHER.addURI(ProductConrtact.CONTENT_AUTHORITY,
+                ProductConrtact.PATH_PRODUCTS + "/#", PRODUCT_ID);
 
     }
 
@@ -46,7 +45,8 @@ public class ProductProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
         SQLiteDatabase database = productDbHelper.getReadableDatabase();
 
@@ -56,12 +56,14 @@ public class ProductProvider extends ContentProvider {
 
         switch (match) {
             case PRODUCTS:
-                cursor = database.query(ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(ProductEntry.TABLE_NAME, projection, selection,
+                        selectionArgs, null, null, sortOrder);
                 break;
             case PRODUCT_ID:
                 selection = ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(ProductEntry.TABLE_NAME, projection, selection,
+                        selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("unknown URI" + uri);
@@ -71,7 +73,6 @@ public class ProductProvider extends ContentProvider {
 
         return cursor;
     }
-    // TODO: 25.06.2017 skończyć resztę zapytań
 
     @Nullable
     @Override
@@ -109,17 +110,12 @@ public class ProductProvider extends ContentProvider {
         }
         String desc = values.getAsString(ProductEntry.COLUMN_DESC);
         if (desc == null) {
-            desc = "";
+            throw new IllegalArgumentException("required valid describe");
         }
         String supplier = values.getAsString(ProductEntry.COLUMN_SUPPLIER);
         if (supplier == null) {
             throw new IllegalArgumentException("required valid addres");
         }
-        String image = values.getAsString(ProductEntry.COLUMN_IMAGE);
-        if (image == null) {
-            // TODO: 26.06.2017 uzupełnij wpisy
-        }
-
         SQLiteDatabase database = productDbHelper.getWritableDatabase();
 
         long id = database.insert(ProductEntry.TABLE_NAME, null, values);
@@ -140,28 +136,29 @@ public class ProductProvider extends ContentProvider {
 
         int delRows;
 
-        switch (match){
+        switch (match) {
             case PRODUCTS:
-                delRows = database.delete(ProductEntry.TABLE_NAME,selection,selectionArgs);
+                delRows = database.delete(ProductEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case PRODUCT_ID:
                 selection = ProductEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                delRows = database.delete(ProductEntry.TABLE_NAME,selection,selectionArgs);
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                delRows = database.delete(ProductEntry.TABLE_NAME, selection, selectionArgs);
                 break;
 
             default:
-                throw new IllegalArgumentException("not support for: "+uri);
+                throw new IllegalArgumentException("not support for: " + uri);
         }
 
-        if (delRows!= 0) {
+        if (delRows != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
         return delRows;
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+    public int update(@NonNull Uri uri, @Nullable ContentValues values,
+                      @Nullable String selection, @Nullable String[] selectionArgs) {
 
         final int match = URI_MATCHER.match(uri);
         switch (match) {

@@ -9,33 +9,40 @@
 
     <TextView
         android:id="@+id/item_id"
+        style="@style/viewItemStyle"
         android:layout_weight="1"
-        style="@style/viewItemStyle"/>
+        android:textAlignment="textStart" />
+
     <TextView
         android:id="@+id/item_name"
+        style="@style/viewItemStyle"
         android:layout_weight="5"
-        style="@style/viewItemStyle"/>
+        android:textAlignment="center" />
+
     <TextView
         android:id="@+id/item_price"
+        style="@style/viewItemStyle"
         android:layout_weight="2"
-        android:textAlignment="textEnd"
-        style="@style/viewItemStyle"/>
+        android:textAlignment="textEnd" />
 
     <TextView
         android:id="@+id/textView"
         style="@style/viewItemStyle"
         android:layout_weight="1"
-        android:text="@string/dollar" />
+        android:text="@string/dollar"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_quantity"
+        style="@style/viewItemStyle"
         android:layout_weight="2"
-        android:textAlignment="textEnd"
-        style="@style/viewItemStyle"/>
+        android:textAlignment="textEnd" />
+
     <TextView
+        style="@style/viewItemStyle"
+        android:layout_weight="1.5"
         android:text="@string/pcs"
-        android:layout_weight="1"
-        style="@style/viewItemStyle"/>
+        android:textAlignment="center" />
     <Button
         android:id="@+id/sale_button"
         style="@style/viewItemStyle"
