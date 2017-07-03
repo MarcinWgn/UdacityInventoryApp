@@ -18,7 +18,7 @@ import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.Produ
  * Created by Marcin on 25.06.2017 :)
  */
 
- class ProductCursorAdapter extends CursorAdapter {
+class ProductCursorAdapter extends CursorAdapter {
 
 
     ProductCursorAdapter(Context context, Cursor c) {
@@ -27,7 +27,7 @@ import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.Produ
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.list_item,parent,false);
+        return LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
     }
 
     @Override
@@ -62,11 +62,11 @@ import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.Produ
             @Override
             public void onClick(View v) {
 
-                if(intQuantity>0){
-                    Uri currentPetUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI,intID);
+                if (intQuantity > 0) {
+                    Uri currentPetUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, intID);
                     ContentValues values = new ContentValues();
-                    values.put(ProductEntry.COLUMN_QUANTITY,intQuantity-1);
-                    context.getContentResolver().update(currentPetUri,values,null,null);
+                    values.put(ProductEntry.COLUMN_QUANTITY, intQuantity - 1);
+                    context.getContentResolver().update(currentPetUri, values, null, null);
                 }
             }
         });

@@ -1,11 +1,15 @@
 package com.example.marcin.wegrzyn.inventoryapp;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +26,9 @@ import static com.example.marcin.wegrzyn.inventoryapp.Data.ProductConrtact.Produ
 
 public class AddProductActivity extends AppCompatActivity {
 
+    private static final String TAG = AddProductActivity.class.getSimpleName();
+    public static int REQ_STORAGE_PERMISSION = 200;
+
     public static final String SAVE_URI = "SaveUri";
     static final int IMAGE_REQUEST_CODE = 1;
     private ImageView imageView;
@@ -37,9 +44,11 @@ public class AddProductActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+
         if (uri != null && !uri.equals(Uri.EMPTY)) {
             outState.putString(SAVE_URI, uri.toString());
         }
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -62,11 +71,11 @@ public class AddProductActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addImage();
+                startWithPermission();
             }
         });
 
-        if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+        if (savedInstanceState != null&& savedInstanceState.containsKey(SAVE_URI)) {
             uri = Uri.parse(savedInstanceState.getString(SAVE_URI, null));
             showImage();
         }
@@ -84,9 +93,8 @@ public class AddProductActivity extends AppCompatActivity {
         if (id == R.id.add) {
             saveProduct();
             return true;
-
         } else if (id == R.id.addImage) {
-            addImage();
+            startWithPermission();
             return true;
         }
 
@@ -96,13 +104,14 @@ public class AddProductActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             uri = data.getData();
             showImage();
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
     private void addImage() {
         Intent getImageIntent = new Intent(Intent.ACTION_PICK);
@@ -134,7 +143,7 @@ public class AddProductActivity extends AppCompatActivity {
                 || quantityString.isEmpty()
                 || describe.isEmpty()
                 || email.isEmpty()
-                || bitmap==null) {
+                || bitmap == null) {
             Toast.makeText(this, R.string.complete_field, Toast.LENGTH_SHORT).show();
         } else {
 
@@ -147,7 +156,6 @@ public class AddProductActivity extends AppCompatActivity {
                 productInsert(name, quantity, price, describe, bitmap, email);
             }
         }
-
     }
 
     private byte[] convertBitmap(Bitmap bitmap) {
@@ -189,4 +197,32 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
+    private void startWithPermission() {
+        if (isPermission()) {
+            addImage();
+        } else reqPermission();
+    }
+
+    private boolean isPermission() {
+        return ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void reqPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                REQ_STORAGE_PERMISSION);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (REQ_STORAGE_PERMISSION == requestCode) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                addImage();
+            }
+        }
+    }
 }

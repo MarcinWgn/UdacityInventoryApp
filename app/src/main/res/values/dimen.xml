@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_dimen_margin">18dp</dimen>
+    <dimen name="lay_dimen_padding">5dp</dimen>
+</resources>
